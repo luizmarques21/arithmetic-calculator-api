@@ -37,6 +37,7 @@ CREATE TABLE `record` (
   `user_balance` int(11) DEFAULT NULL,
   `operation_response` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `fk_record_operation` (`operation_id`),
   KEY `fk_record_user` (`user_id`),
