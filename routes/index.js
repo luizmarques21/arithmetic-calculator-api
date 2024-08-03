@@ -6,6 +6,7 @@ const cors = require('cors');
 const userMiddleware = require('../middlewares/user');
 const userController = require('../controllers/user');
 const operationController = require('../controllers/operation');
+const recordController = require('../controllers/record');
 
 const app = express();
 app.use(cors());
@@ -21,5 +22,8 @@ app.post('/login', userMiddleware.checkUserLogin, userController.login);
 
 app.post('/operation', userMiddleware.handleAuth, operationController.registerOperation);
 
+app.get('/records', userMiddleware.handleAuth, recordController.getRecords);
+
+app.delete('/record/:id', userMiddleware.handleAuth, recordController.deleteRecord);
 
 module.exports = app;

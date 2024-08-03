@@ -31,13 +31,14 @@ module.exports = {
     },
     async handleAuth(req, res, next) {
       let isValid = true;
-      const token = req.headers.authorization.replace('Bearer ', '');
+      let token = req.headers.authorization;
       const secret = process.env.APP_AUTH_HASH;
       
       if (!token) {
         res.status(401).send("Unauthorized: No token provided");
       } else {
-        jwt.verify(token, secret, function (err, decoded) {
+        let hash = token.replace('Bearer ', '');
+        jwt.verify(hash, secret, function (err, decoded) {
           if (err) {
             console.log(err);
             isValid = false;
